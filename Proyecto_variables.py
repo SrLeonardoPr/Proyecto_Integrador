@@ -23,8 +23,8 @@ limite_flotantes = 1.8e308  # El límite es aproximadamente 1.8 x 10^308
 print("Límite de flotantes:", limite_flotantes)
 
 # Fórmula para la suma de los primeros n números pares
-n = 5
+n = 5 #Tambien se puede pedir por teclado con un input
 suma_pares = n * (n + 1)  # La suma de los primeros n números pares es n * (n + 1)
 print("Suma de los primeros", n, "números pares:", suma_pares)
 
-
+## Fin de la tarea  Lun 3 Jul 2023
