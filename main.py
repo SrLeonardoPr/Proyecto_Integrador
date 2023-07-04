@@ -16,8 +16,21 @@ Este proyecto ha sido creado como parte del programa de estudio en ADA school y 
 """
 
 # Aquí comienza el código del proyecto...
+from readchar import readkey
+
 
 # Parte I
 
 nombre_jugador = input("Hola querido jugador, nos complace darte la bienvenida a este maravilloso juego, esperamos sea de tu agrado y lo disfrutes de inicio a fin. Primero que todo, queremos conocerte, por favor indicanos tu nombre --> ")
 print("De ahora en adelante te llamaremos {} es un gusto para nosotros tenerte aqui. ---Empecemos--- ".format(nombre_jugador))
+
+# Parte II
+while True:
+    tecla = readkey()
+    if tecla == '\x1b':  # Código de escape (para salir del bucle infinito)
+        break
+    elif tecla == '\x1b[A':  # Código de la tecla ↑ (flecha hacia arriba)
+        print("Se presionó la tecla ↑ (flecha hacia arriba)")
+        break
+    else:
+        print(f"Se presionó la tecla: {tecla}")
