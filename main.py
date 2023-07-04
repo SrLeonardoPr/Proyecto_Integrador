@@ -1,6 +1,8 @@
 """
 Proyecto Integrador - Python
 
+Juego del Laberinto.py
+
 Autor: Jose Leonardo Piñeres
 Estudiante de ADA school
 
