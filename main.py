@@ -3,84 +3,70 @@ Proyecto Integrador - Python
 Este proyecto ha sido creado como parte del programa de estudio en ADA school y representa el esfuerzo y dedicación del estudiante en el aprendizaje de Python y su aplicación en proyectos reales.
 
 """
-
+## Version 5.0 del proyecto integrador 
+## Status FINALIZADO. Utilizacion de Clases con mapas aleatorios.
 import os
-import readchar
+import random
 
+class Juego:
+    def __init__(self, mapa_str):
+        self.mapa = self.parsear_mapa(mapa_str)
+        self.pos_inicial = (0, 0)
+        self.pos_final = (len(self.mapa[0]) - 1, 20)
+        self.px, self.py = self.pos_inicial
+        self.mapa[self.py][self.px] = 'P'
 
-def limpiar_terminal():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    def parsear_mapa(self, mapa_str):
+        mapa_filas = mapa_str.strip().split("\n")
+        return [list(fila) for fila in mapa_filas]
 
-def mostrar_mapa(mapa):
-    for fila in mapa:
-        print(''.join(fila))
+    def limpiar_terminal(self):
+        os.system('cls' if os.name == 'nt' else 'clear')
 
-def juego_laberinto(mapa, pos_inicial, pos_final):
-    px, py = pos_inicial
-    mapa[py][px] = 'P'
-    mostrar_mapa(mapa)
-    
-    while (px, py) != pos_final:
-        tecla = readchar.readkey()
-        nueva_px, nueva_py = px, py
-        
-        if tecla == '\x1b':
-            break
-        elif tecla == '\x1b[A':
-            nueva_py -= 1
-        elif tecla == '\x1b[B':
-            nueva_py += 1
-        elif tecla == '\x1b[C':
-            nueva_px += 1
-        elif tecla == '\x1b[D':
-            nueva_px -= 1
-        
+    def mostrar_mapa(self):
+        for fila in self.mapa:
+            print(''.join(fila))
+
+    def mover_jugador(self, dx, dy):
+        nueva_px, nueva_py = self.px + dx, self.py + dy
+
         if (
-            0 <= nueva_px < len(mapa[0]) and
-            0 <= nueva_py < len(mapa) and
-            mapa[nueva_py][nueva_px] != '#'
+            0 <= nueva_px < len(self.mapa[0]) and
+            0 <= nueva_py < len(self.mapa) and
+            self.mapa[nueva_py][nueva_px] != '#'
         ):
-            mapa[py][px] = '.'
-            px, py = nueva_px, nueva_py
-            mapa[py][px] = 'P'
-            limpiar_terminal()
-            mostrar_mapa(mapa)
+            self.mapa[self.py][self.px] = '.'
+            self.px, self.py = nueva_px, nueva_py
+            self.mapa[self.py][self.px] = 'P'
+            self.limpiar_terminal()
+            self.mostrar_mapa()
         else:
-            limpiar_terminal()
-            mostrar_mapa(mapa)
+            self.limpiar_terminal()
+            self.mostrar_mapa()
             print("Movimiento inválido")
 
+class JuegoArchivo(Juego):
+    def __init__(self, mapa_folder):
+        nombre_archivo = random.choice(os.listdir(mapa_folder))
+        path_completo = os.path.join(mapa_folder, nombre_archivo)
+        with open(path_completo, 'r') as archivo:
+            mapa_str = archivo.read()
+        super().__init__(mapa_str)
+
 if __name__ == "__main__":
-    laberinto_str = (
-        "..###################\n"
-        "....#.....#.....#...#\n"
-        "#.#.#.#######.#.###.#\n"
-        "#.#.....#.#...#.....#\n"
-        "###.#####.#######.#.#\n"
-        "#.........#.......#.#\n"
-        "#####.###.###.###.#.#\n"
-        "#.#.....#.....#...#.#\n"
-        "#.###########.###.#.#\n"
-        "#.#...#.........#.#.#\n"
-        "#.#.#.###.#######.#.#\n"
-        "#.#.#...#.#.#...#.#.#\n"
-        "#.#.#.#.#.#.#.#####.#\n"
-        "#...#.#.......#...#.#\n"
-        "#.#.#####.###.#.#####\n"
-        "#.#.....#.#.......#.#\n"
-        "#.#####.#.#.#.#.###.#\n"
-        "#.#.....#.#.#.#.....#\n"
-        "#####.#######.###.#.#\n"
-        "#...........#...#.#.#\n"
-        "###################.#\n"
-    )
+    juego = JuegoArchivo("mapas") 
+    juego.mostrar_mapa()
 
-    laberinto_filas = laberinto_str.strip().split("\n")
-    laberinto_matriz = [list(fila) for fila in laberinto_filas]
+    while (juego.px, juego.py) != juego.pos_final:
+        tecla = input("Presiona una tecla (W = arriba, S = abajo, A = izquierda, D = derecha, Q = salir): ").upper()
 
-    pos_inicial = (20, len(laberinto_matriz) - 1)
-    pos_final = (len(laberinto_matriz[0]) - 1, 0)
-
-    juego_laberinto(laberinto_matriz, pos_inicial, pos_final)
-
-
+        if tecla == 'Q':
+            break
+        elif tecla == 'W':
+            juego.mover_jugador(0, -1)
+        elif tecla == 'S':
+            juego.mover_jugador(0, 1)
+        elif tecla == 'A':
+            juego.mover_jugador(-1, 0)
+        elif tecla == 'D':
+            juego.mover_jugador(1, 0)
