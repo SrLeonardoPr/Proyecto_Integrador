@@ -3,10 +3,11 @@ Proyecto Integrador - Python
 Este proyecto ha sido creado como parte del programa de estudio en ADA school y representa el esfuerzo y dedicación del estudiante en el aprendizaje de Python y su aplicación en proyectos reales.
 
 """
-## Version 5.0 del proyecto integrador 
-## Status FINALIZADO. Utilizacion de Clases con mapas aleatorios.
+## Version 5.1 del proyecto integrador 
+## Status FINALIZADO ACTUALIZADO. Utilizacion de la funcion map() y reduce().
 import os
 import random
+from functools import reduce
 
 class Juego:
     def __init__(self, mapa_str):
@@ -17,8 +18,8 @@ class Juego:
         self.mapa[self.py][self.px] = 'P'
 
     def parsear_mapa(self, mapa_str):
-        mapa_filas = mapa_str.strip().split("\n")
-        return [list(fila) for fila in mapa_filas]
+        mapa_filas = list(map(list, mapa_str.strip().split("\n")))
+        return mapa_filas
 
     def limpiar_terminal(self):
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -50,7 +51,7 @@ class JuegoArchivo(Juego):
         nombre_archivo = random.choice(os.listdir(mapa_folder))
         path_completo = os.path.join(mapa_folder, nombre_archivo)
         with open(path_completo, 'r') as archivo:
-            mapa_str = archivo.read()
+            mapa_str = reduce(lambda x, y: x + y, archivo.readlines(), '')
         super().__init__(mapa_str)
 
 if __name__ == "__main__":
@@ -70,3 +71,5 @@ if __name__ == "__main__":
             juego.mover_jugador(-1, 0)
         elif tecla == 'D':
             juego.mover_jugador(1, 0)
+
+            
