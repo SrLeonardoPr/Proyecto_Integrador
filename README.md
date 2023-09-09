@@ -1,8 +1,11 @@
 # Proyecto_Integrador
 
-Proyecto Integrador - Python
+Proyectos Integradores - Python
 
-Juego del Laberinto.py
+# Contenido
+1. Juego del Laberinto.py
+2. Bases SQL
+3. Soon...
 
 Autor: Jose Leonardo Piñeres
 Estudiante de ADA school
