@@ -1,6 +1,8 @@
 -- Creacion de base de datos para el proyecto integrador de la academia ADA SCHOOL 
 -- Proyecto realizado por Jose Leonardo Piñeres Ramirez
 
+CREATE DATABASE Proyecto_Integrador_Postgres;
+
 -- Tabla Categoria
 CREATE TABLE Categoria (
     id serial PRIMARY KEY,
