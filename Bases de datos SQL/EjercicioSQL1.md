@@ -4,18 +4,19 @@
 1. Crea una tabla llamada estudiantes con las columnas nombre (VARCHAR), edad (INTEGER) y puntuacion (DECIMAL).
 
 2. Inserta 10 filas de datos en la tabla.
-| nombre | edad | puntuación |
-| --- | --- | --- |
-| Estudiante1 | 20 | 85.5 |
-| Estudiante2 | 21 | 75.0 |
-| Estudiante3 | 19 | 92.5 |
-| Estudiante4 | 22 | 80.2 |
-| Estudiante5 | 20 | 88.9 |
-| Estudiante6 | 21 | 76.8 |
-| Estudiante7 | 19 | 94.2 |
-| Estudiante8 | 22 | 82.1 |
-| Estudiante9 | 20 | 87.3 |
-| Estudiante10 | 21 | 77.6 |
+
+| nombre       | edad | puntuación |
+|--------------|------|------------|
+| Estudiante1  | 20   | 85.5       |
+| Estudiante2  | 21   | 75.0       |
+| Estudiante3  | 19   | 92.5       |
+| Estudiante4  | 22   | 80.2       |
+| Estudiante5  | 20   | 88.9       |
+| Estudiante6  | 21   | 76.8       |
+| Estudiante7  | 19   | 94.2       |
+| Estudiante8  | 22   | 82.1       |
+| Estudiante9  | 20   | 87.3       |
+| Estudiante10 | 21   | 77.6       |
 
 3. Realiza una consulta para obtener la puntuación promedio de los estudiantes mayores de 20 años.
 
