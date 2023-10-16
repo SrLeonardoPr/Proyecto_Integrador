@@ -42,3 +42,40 @@ LEFT JOIN
 GROUP BY
     c.id, c.nombre;
 
+-- PARTE 6. Agregando restricciones y realizando consultas
+-- 1. Calcular el precio promedio de los productos en cada categoría
+-- Resultado en el archivo (queries_4.csv)
+
+SELECT c.nombre AS categoria, AVG(p.precio_unitario) AS precio_promedio
+FROM Producto p
+JOIN Categoria c ON p.categoria_id = c.id
+GROUP BY c.nombre;
+
+
+-- 2. Obtener la cantidad total de productos en stock por categoría
+-- Resultado en el archivo (queries_5.csv)
+
+SELECT c.nombre AS categoria, SUM(s.cantidad) AS cantidad_total_en_stock
+FROM Producto p
+JOIN Categoria c ON p.categoria_id = c.id
+JOIN Stock s ON p.id = s.producto_id
+GROUP BY c.nombre;
+
+
+-- 3. Calcular el total de ventas por sucursal
+-- Resultado en el archivo (queries_6.csv)
+
+SELECT s.nombre AS sucursal, SUM(o.total) AS total_ventas
+FROM Orden o
+JOIN Sucursal s ON o.sucursal_id = s.id
+GROUP BY s.nombre;
+
+-- 4. Obtener el cliente que ha realizado el mayor monto de compras
+-- Resultado en el archivo (queries_7.csv)
+
+SELECT c.nombre AS cliente, SUM(o.total) AS total_compras
+FROM Orden o
+JOIN Cliente c ON o.cliente_id = c.id
+GROUP BY c.nombre
+ORDER BY total_compras DESC
+LIMIT 1;
